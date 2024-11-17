@@ -165,7 +165,7 @@ class _EnhanceSimulatorState extends State<EnhanceSimulator> {
           IconButton(
             icon: Icon(
               widget.isDarkMode ? Icons.light_mode : Icons.dark_mode,
-              color: widget.isDarkMode ? Colors.yellow : Colors.white,
+              color: widget.isDarkMode ? Colors.yellow : Colors.black,
             ),
             onPressed: () {
               widget.onDarkModeChanged(!widget.isDarkMode);
