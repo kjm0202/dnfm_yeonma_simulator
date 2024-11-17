@@ -70379,7 +70379,7 @@ q.aj(new A.a8N(p,q,s,r*100))},
 aex(){this.aj(new A.a8Q(this))},
 a4b(){this.aj(new A.a8L(this))},
 L(a){var s,r,q,p,o,n=this,m=null,l="#,###",k=n.a.c,j=k?B.eC:B.j,i=k?B.ls:B.lr,h=t.E
-j=A.ajc(A.b([A.Xd(m,A.EA(i,k?B.Gu:B.j,m,m),new A.a8M(n),m,m)],h),j,m,B.P2)
+j=A.ajc(A.b([A.Xd(m,A.EA(i,k?B.Gu:B.l,m,m),new A.a8M(n),m,m)],h),j,m,B.P2)
 k=A.fh(A.b([A.cq("\uc5f0\ub9c8 \uc2dc\ubbac\ub808\uc774\ud130 V4",m,m,m,A.f2(m,m,n.a.c?B.j:B.l,m,m,m,m,m,m,m,m,24,m,m,B.c7,m,m,!0,m,m,m,m,m,m,m,m),m,m),B.wH,A.cq("\ud604\uc7ac \uc5f0\ub9c8 \uc218\uce58: "+n.d,m,m,m,B.Ng,m,m)],h),B.a6,B.au,B.aD)
 s=n.x4()
 i=n.a.c?B.bH:B.dB
