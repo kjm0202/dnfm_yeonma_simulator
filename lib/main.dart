@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'yeonma.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:url_strategy/url_strategy.dart';
+// import 'package:url_strategy/url_strategy.dart';
 
 void main() {
-  setPathUrlStrategy();
+  // setPathUrlStrategy();
   runApp(const MyApp());
 }
 
