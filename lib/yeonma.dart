@@ -179,7 +179,7 @@ class _EnhanceSimulatorState extends State<EnhanceSimulator> {
             child: Container(
               constraints: BoxConstraints(maxWidth: 720), // 최대 가로 길이 설정
               child: Padding(
-                padding: const EdgeInsets.all(16.0),
+                padding: const EdgeInsets.all(4.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
@@ -230,7 +230,7 @@ class _EnhanceSimulatorState extends State<EnhanceSimulator> {
       elevation: 4,
       color: widget.isDarkMode ? Colors.grey[850] : Colors.grey[100],
       child: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
             Text(
@@ -260,7 +260,7 @@ class _EnhanceSimulatorState extends State<EnhanceSimulator> {
       elevation: 4,
       color: widget.isDarkMode ? Colors.grey[850] : Colors.grey[100],
       child: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
             _buildMaterialItem('연마석', stageData[stone].toString()),
@@ -276,7 +276,7 @@ class _EnhanceSimulatorState extends State<EnhanceSimulator> {
 
   Widget _buildMaterialItem(String label, String value) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 4.0),
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -291,7 +291,7 @@ class _EnhanceSimulatorState extends State<EnhanceSimulator> {
     return Column(
       children: [
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          padding: const EdgeInsets.symmetric(horizontal: 8.0),
           child: TextField(
             controller: _targetController,
             keyboardType: TextInputType.number,
@@ -337,7 +337,7 @@ class _EnhanceSimulatorState extends State<EnhanceSimulator> {
       elevation: 4,
       color: widget.isDarkMode ? Colors.grey[850] : Colors.grey[100],
       child: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(8.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -370,7 +370,7 @@ class _EnhanceSimulatorState extends State<EnhanceSimulator> {
       color: widget.isDarkMode ? Colors.grey[850] : Colors.grey[100],
       elevation: 4,
       child: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(8.0),
         child: Column(
           children: const [
             Text('촉매제 70,000테라 / 연마석 10,000테라'),
