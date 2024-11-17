@@ -1,361 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'dart:async';
 import 'dart:math';
 import 'package:intl/intl.dart';
-
-// 상수 정의
-const String success = 'success';
-const String maintain = 'maintain';
-const String fail = 'fail';
-const String destroy = 'destroy';
-const String catalysts = 'catalysts';
-const String sangrako = 'sangrako';
-const String gold = 'gold';
-const String stone = 'stone';
-
-// 스테이지 데이터
-final List<Map<String, dynamic>> stages = [
-  {
-    success: 45,
-    maintain: 55,
-    fail: 0,
-    destroy: 0,
-    catalysts: 2,
-    sangrako: 3,
-    gold: 6200000,
-    stone: 99
-  }, // 0->1
-  {
-    success: 30,
-    maintain: 40,
-    fail: 30,
-    destroy: 0,
-    catalysts: 2,
-    sangrako: 3,
-    gold: 7502000,
-    stone: 116
-  }, // 1->2
-  {
-    success: 20,
-    maintain: 50,
-    fail: 30,
-    destroy: 0,
-    catalysts: 2,
-    sangrako: 4,
-    gold: 9002340,
-    stone: 135
-  }, // 2->3
-  {
-    success: 20,
-    maintain: 45,
-    fail: 30,
-    destroy: 5,
-    catalysts: 3,
-    sangrako: 4,
-    gold: 10427000,
-    stone: 157
-  }, // 3->4
-  {
-    success: 17,
-    maintain: 44,
-    fail: 30,
-    destroy: 9,
-    catalysts: 3,
-    sangrako: 5,
-    gold: 12254000,
-    stone: 177
-  }, // 4->5
-  {
-    success: 15,
-    maintain: 42,
-    fail: 30,
-    destroy: 13,
-    catalysts: 3,
-    sangrako: 5,
-    gold: 13979000,
-    stone: 200
-  }, // 5->6
-  {
-    success: 10,
-    maintain: 60,
-    fail: 0,
-    destroy: 30,
-    catalysts: 4,
-    sangrako: 6,
-    gold: 15806000,
-    stone: 220
-  }, // 6->7
-  {
-    success: 7,
-    maintain: 53,
-    fail: 0,
-    destroy: 40,
-    catalysts: 4,
-    sangrako: 6,
-    gold: 17781000,
-    stone: 241
-  }, // 7->8
-  {
-    success: 3,
-    maintain: 37,
-    fail: 0,
-    destroy: 60,
-    catalysts: 4,
-    sangrako: 7,
-    gold: 19881000,
-    stone: 263
-  }, // 8->9
-  {
-    success: 1,
-    maintain: 29,
-    fail: 0,
-    destroy: 70,
-    catalysts: 5,
-    sangrako: 7,
-    gold: 22136000,
-    stone: 283
-  } // 9->10
-];
-
-final List<Map<String, dynamic>> stages1 = [
-  {
-    success: 45,
-    maintain: 55,
-    fail: 0,
-    destroy: 0,
-    catalysts: 2,
-    sangrako: 3,
-    gold: 6200000,
-    stone: 99
-  }, // 0->1
-  {
-    success: 30,
-    maintain: 50,
-    fail: 20,
-    destroy: 0,
-    catalysts: 2,
-    sangrako: 3,
-    gold: 7502000,
-    stone: 116
-  }, // 1->2
-  {
-    success: 20,
-    maintain: 70,
-    fail: 10,
-    destroy: 0,
-    catalysts: 2,
-    sangrako: 4,
-    gold: 9002340,
-    stone: 135
-  }, // 2->3
-  {
-    success: 20,
-    maintain: 55,
-    fail: 20,
-    destroy: 5,
-    catalysts: 3,
-    sangrako: 4,
-    gold: 10427000,
-    stone: 157
-  }, // 3->4
-  {
-    success: 17,
-    maintain: 54,
-    fail: 20,
-    destroy: 9,
-    catalysts: 3,
-    sangrako: 5,
-    gold: 12254000,
-    stone: 177
-  }, // 4->5
-  {
-    success: 15,
-    maintain: 52,
-    fail: 20,
-    destroy: 13,
-    catalysts: 3,
-    sangrako: 5,
-    gold: 13979000,
-    stone: 200
-  }, // 5->6
-  {
-    success: 10,
-    maintain: 60,
-    fail: 0,
-    destroy: 30,
-    catalysts: 4,
-    sangrako: 6,
-    gold: 15806000,
-    stone: 220
-  }, // 6->7
-  {
-    success: 7,
-    maintain: 53,
-    fail: 0,
-    destroy: 40,
-    catalysts: 4,
-    sangrako: 6,
-    gold: 17781000,
-    stone: 241
-  }, // 7->8
-  {
-    success: 3,
-    maintain: 37,
-    fail: 0,
-    destroy: 60,
-    catalysts: 4,
-    sangrako: 7,
-    gold: 19881000,
-    stone: 263
-  }, // 8->9
-  {
-    success: 1,
-    maintain: 29,
-    fail: 0,
-    destroy: 70,
-    catalysts: 5,
-    sangrako: 7,
-    gold: 22136000,
-    stone: 283
-  } // 9->10
-];
-
-final List<Map<String, dynamic>> stages2 = [
-  {
-    success: 45,
-    maintain: 55,
-    fail: 0,
-    destroy: 0,
-    catalysts: 2,
-    sangrako: 3,
-    gold: 6200000,
-    stone: 99
-  }, // 0->1
-  {
-    success: 30,
-    maintain: 70,
-    fail: 0,
-    destroy: 0,
-    catalysts: 2,
-    sangrako: 3,
-    gold: 7502000,
-    stone: 116
-  }, // 1->2
-  {
-    success: 20,
-    maintain: 80,
-    fail: 0,
-    destroy: 0,
-    catalysts: 2,
-    sangrako: 4,
-    gold: 9002340,
-    stone: 135
-  }, // 2->3
-  {
-    success: 20,
-    maintain: 75,
-    fail: 0,
-    destroy: 5,
-    catalysts: 3,
-    sangrako: 4,
-    gold: 10427000,
-    stone: 157
-  }, // 3->4
-  {
-    success: 17,
-    maintain: 74,
-    fail: 0,
-    destroy: 9,
-    catalysts: 3,
-    sangrako: 5,
-    gold: 12254000,
-    stone: 177
-  }, // 4->5
-  {
-    success: 15,
-    maintain: 72,
-    fail: 0,
-    destroy: 13,
-    catalysts: 3,
-    sangrako: 5,
-    gold: 13979000,
-    stone: 200
-  }, // 5->6
-  {
-    success: 10,
-    maintain: 60,
-    fail: 0,
-    destroy: 30,
-    catalysts: 4,
-    sangrako: 6,
-    gold: 15806000,
-    stone: 220
-  }, // 6->7
-  {
-    success: 7,
-    maintain: 53,
-    fail: 0,
-    destroy: 40,
-    catalysts: 4,
-    sangrako: 6,
-    gold: 17781000,
-    stone: 241
-  }, // 7->8
-  {
-    success: 3,
-    maintain: 37,
-    fail: 0,
-    destroy: 60,
-    catalysts: 4,
-    sangrako: 7,
-    gold: 19881000,
-    stone: 263
-  }, // 8->9
-  {
-    success: 1,
-    maintain: 29,
-    fail: 0,
-    destroy: 70,
-    catalysts: 5,
-    sangrako: 7,
-    gold: 22136000,
-    stone: 283
-  } // 9->10
-];
-
-class MyApp extends StatefulWidget {
-  const MyApp({super.key});
-
-  @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  bool isDarkMode = false;
-
-  void toggleDarkMode(bool value) {
-    setState(() {
-      isDarkMode = value;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: '연마 시뮬레이터 V3',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        textTheme: GoogleFonts.notoSansKrTextTheme(),
-        brightness: isDarkMode ? Brightness.dark : Brightness.light,
-      ),
-      home: EnhanceSimulator(
-        isDarkMode: isDarkMode,
-        onDarkModeChanged: toggleDarkMode,
-      ),
-    );
-  }
-}
+import 'data.dart';
 
 class EnhanceSimulator extends StatefulWidget {
   final bool isDarkMode;
@@ -512,8 +159,8 @@ class _EnhanceSimulatorState extends State<EnhanceSimulator> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('연마 시뮬레이터 V3'),
-        backgroundColor: widget.isDarkMode ? Colors.grey[900] : Colors.blue,
+        title: const Text('연마 시뮬레이터 V4'),
+        backgroundColor: widget.isDarkMode ? Colors.grey[900] : Colors.white,
         actions: [
           IconButton(
             icon: Icon(
@@ -527,24 +174,29 @@ class _EnhanceSimulatorState extends State<EnhanceSimulator> {
         ],
       ),
       body: SafeArea(
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                _buildHeader(),
-                const SizedBox(height: 24),
-                _buildStatusCard(),
-                const SizedBox(height: 16),
-                _buildMaterialsCard(),
-                const SizedBox(height: 24),
-                _buildButtons(),
-                const SizedBox(height: 24),
-                _buildUsageStats(),
-                const SizedBox(height: 16),
-                _buildNotice(),
-              ],
+        child: Center(
+          child: SingleChildScrollView(
+            child: Container(
+              constraints: BoxConstraints(maxWidth: 720), // 최대 가로 길이 설정
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    _buildHeader(),
+                    const SizedBox(height: 24),
+                    _buildStatusCard(),
+                    const SizedBox(height: 16),
+                    _buildMaterialsCard(),
+                    const SizedBox(height: 24),
+                    _buildButtons(),
+                    const SizedBox(height: 24),
+                    _buildUsageStats(),
+                    const SizedBox(height: 16),
+                    _buildNotice(),
+                  ],
+                ),
+              ),
             ),
           ),
         ),
@@ -556,7 +208,7 @@ class _EnhanceSimulatorState extends State<EnhanceSimulator> {
     return Column(
       children: [
         Text(
-          '연마 시뮬레이터 V3',
+          '연마 시뮬레이터 V4',
           style: TextStyle(
             fontSize: 24,
             fontWeight: FontWeight.bold,
@@ -576,6 +228,7 @@ class _EnhanceSimulatorState extends State<EnhanceSimulator> {
     final stageData = getStageData();
     return Card(
       elevation: 4,
+      color: widget.isDarkMode ? Colors.grey[850] : Colors.grey[100],
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -605,6 +258,7 @@ class _EnhanceSimulatorState extends State<EnhanceSimulator> {
     final stageData = getStageData();
     return Card(
       elevation: 4,
+      color: widget.isDarkMode ? Colors.grey[850] : Colors.grey[100],
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -670,7 +324,7 @@ class _EnhanceSimulatorState extends State<EnhanceSimulator> {
             ElevatedButton(
               onPressed: _resetAll,
               style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
-              child: const Text('리셋'),
+              child: const Text('리셋', style: TextStyle(color: Colors.white)),
             ),
           ],
         ),
@@ -681,6 +335,7 @@ class _EnhanceSimulatorState extends State<EnhanceSimulator> {
   Widget _buildUsageStats() {
     return Card(
       elevation: 4,
+      color: widget.isDarkMode ? Colors.grey[850] : Colors.grey[100],
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -690,16 +345,16 @@ class _EnhanceSimulatorState extends State<EnhanceSimulator> {
                 style: TextStyle(fontWeight: FontWeight.bold)),
             const SizedBox(height: 8),
             Text(
-                '연마석: ${totalStoneUsed.toStringAsFixed(0)} (${(totalStoneUsed * 417).toStringAsFixed(0)}원)'),
+                '연마석: ${NumberFormat('#,###').format(totalStoneUsed)} (${NumberFormat('#,###').format(totalStoneUsed * 417)}원)'),
             Text(
-                '촉매제: ${totalCatalystsUsed.toStringAsFixed(0)} (${(totalCatalystsUsed * 2917).toStringAsFixed(0)}원)'),
+                '촉매제: ${NumberFormat('#,###').format(totalCatalystsUsed)} (${NumberFormat('#,###').format(totalCatalystsUsed * 2917)}원)'),
             Text(
-                '상급 라이언 코크스: ${totalSangrakoUsed.toStringAsFixed(0)} (${(totalSangrakoUsed * 417).toStringAsFixed(0)}원)'),
+                '상급 라이언 코크스: ${NumberFormat('#,###').format(totalSangrakoUsed)} (${NumberFormat('#,###').format(totalSangrakoUsed * 417)}원)'),
             Text(
-                '골드: ${totalGoldUsed.toStringAsFixed(0)} (${(totalGoldUsed / 2400).floor().toStringAsFixed(0)}원)'),
+                '골드: ${NumberFormat('#,###').format(totalGoldUsed)} (${NumberFormat('#,###').format((totalGoldUsed / 2400).floor())}원)'),
             const Divider(),
             Text(
-              '💸 현재까지 사용된 현금: 약 ${calculateTotalCost()}원',
+              '💸 현재까지 사용된 현금: 약 ${NumberFormat('#,###').format(int.parse(calculateTotalCost()))}원',
               style: const TextStyle(fontWeight: FontWeight.bold),
             ),
             Text('실패한 횟수: $failCount, 파괴된 횟수: $destroyCount'),
@@ -712,6 +367,7 @@ class _EnhanceSimulatorState extends State<EnhanceSimulator> {
 
   Widget _buildNotice() {
     return Card(
+      color: widget.isDarkMode ? Colors.grey[850] : Colors.grey[100],
       elevation: 4,
       child: Padding(
         padding: const EdgeInsets.all(16.0),

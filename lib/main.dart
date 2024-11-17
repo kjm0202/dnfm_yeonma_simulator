@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'yeonma.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:url_strategy/url_strategy.dart';
 
 void main() {
+  setPathUrlStrategy();
   runApp(const MyApp());
 }
 
@@ -15,6 +17,14 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   bool isDarkMode = false;
+
+  @override
+  void initState() {
+    super.initState();
+    // 다크 모드 여부를 확인하여 기본값 설정
+    isDarkMode =
+        WidgetsBinding.instance.window.platformBrightness == Brightness.dark;
+  }
 
   void toggleDarkMode(bool value) {
     setState(() {
@@ -105,59 +115,183 @@ class HomePage extends StatelessWidget {
           children: [
             // 헤더 섹션
             Container(
-              height: 400,
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                  colors: isDarkMode
-                      ? [Color(0xFF2C3E50), Color(0xFF3498DB)]
-                      : [Color(0xFF6B8DE3), Color(0xFF8B9FE3)],
-                ),
-              ),
-              child: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Text(
-                      '환영합니다',
-                      style: TextStyle(
-                        fontSize: 48,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                      ),
-                    ),
-                    const SizedBox(height: 20),
-                    const Text(
-                      '베놈의 Flutter 놀이터',
-                      style: TextStyle(
-                        fontSize: 24,
-                        color: Colors.white,
-                      ),
-                    ),
-                    const SizedBox(height: 40),
-                    ElevatedButton(
-                      onPressed: () {
-                        Navigator.of(context).pushNamed('/yeonma');
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.white,
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 40,
-                          vertical: 20,
+              height: MediaQuery.of(context).size.height * 0.5,
+              child: MediaQuery.of(context).size.width > 1280
+                  ? /* Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Expanded(
+                            child: Image.asset(
+                          'assets/venom_4.png',
+                        )), // 첫 번째 이미지
+                        Expanded(
+                            child: Image.asset(
+                          'assets/venom_2.webp',
+                        )), // 두 번째 이미지
+                        Expanded(
+                            child: Image.asset(
+                          'assets/venom_1.png',
+                        )), // 세 번째 이미지
+                      ],
+                    ) */
+
+                  Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Expanded(
+                          child: Container(
+                            decoration: BoxDecoration(
+                              image: DecorationImage(
+                                image: AssetImage(isDarkMode
+                                        ? 'assets/venom_4.png' // 다크모드 이미지
+                                        : 'assets/anti_venom_1.png' // 라이트모드 이미지
+                                    ),
+                                fit: BoxFit.contain,
+                              ),
+                            ),
+                            child: Container(
+                              color: Colors.black
+                                  .withOpacity(0.25), // 반투명 검정색 오버레이
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          child: Container(
+                            decoration: BoxDecoration(
+                              image: DecorationImage(
+                                image: AssetImage(isDarkMode
+                                        ? 'assets/venom_2.webp' // 다크모드 이미지
+                                        : 'assets/anti_venom_3.webp' // 라이트모드 이미지
+                                    ),
+                                fit: BoxFit.contain,
+                              ),
+                            ),
+                            child: Container(
+                              color: Colors.black
+                                  .withOpacity(0.25), // 반투명 검정색 오버레이
+                              child: Center(
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    const Text(
+                                      '환영합니다',
+                                      style: TextStyle(
+                                        fontSize: 48,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                    const SizedBox(height: 20),
+                                    const Text(
+                                      '베놈의 작은 놀이터',
+                                      style: TextStyle(
+                                        fontSize: 24,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                    const SizedBox(height: 40),
+                                    ElevatedButton(
+                                      onPressed: () {
+                                        Navigator.of(context)
+                                            .pushNamed('/yeonma');
+                                      },
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor: Colors.white,
+                                        padding: const EdgeInsets.symmetric(
+                                          horizontal: 40,
+                                          vertical: 20,
+                                        ),
+                                      ),
+                                      child: const Text(
+                                        '시작하기',
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                          color: Color(0xFF6B8DE3),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          child: Container(
+                            decoration: BoxDecoration(
+                              image: DecorationImage(
+                                image: AssetImage(isDarkMode
+                                        ? 'assets/venom_1.png' // 다크모드 이미지
+                                        : 'assets/anti_venom_4.png' // 라이트모드 이미지
+                                    ),
+                                fit: BoxFit.contain,
+                              ),
+                            ),
+                            child: Container(
+                              color: Colors.black
+                                  .withOpacity(0.25), // 반투명 검정색 오버레이
+                            ),
+                          ),
+                        ),
+                      ],
+                    )
+                  : Container(
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage(isDarkMode
+                                  ? 'assets/venom_4.png' // 다크모드 이미지
+                                  : 'assets/anti_venom_1.png' // 라이트모드 이미지
+                              ),
+                          fit: BoxFit.contain,
                         ),
                       ),
-                      child: const Text(
-                        '시작하기',
-                        style: TextStyle(
-                          fontSize: 18,
-                          color: Color(0xFF6B8DE3),
+                      child: Container(
+                        color: Colors.black.withOpacity(0.2), // 반투명 검정색 오버레이
+                        child: Center(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              const Text(
+                                '환영합니다',
+                                style: TextStyle(
+                                  fontSize: 48,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                ),
+                              ),
+                              const SizedBox(height: 20),
+                              const Text(
+                                '베놈의 작은 놀이터',
+                                style: TextStyle(
+                                  fontSize: 24,
+                                  color: Colors.white,
+                                ),
+                              ),
+                              const SizedBox(height: 40),
+                              ElevatedButton(
+                                onPressed: () {
+                                  Navigator.of(context).pushNamed('/yeonma');
+                                },
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: Colors.white,
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 40,
+                                    vertical: 20,
+                                  ),
+                                ),
+                                child: const Text(
+                                  '시작하기',
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    color: Color(0xFF6B8DE3),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),
-                  ],
-                ),
-              ),
             ),
 
             // 특징 섹션
