@@ -24,9 +24,28 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
+    // 현재 URL 경로 가져오기
+    final uri = Uri.parse(Uri.base.toString());
+    final initialRoute = uri.path == '/yeonma' ? '/yeonma' : '/';
+
     return MaterialApp(
       title: '클린타르',
       debugShowCheckedModeBanner: false,
+      initialRoute: initialRoute, // 초기 라우트 설정
+      routes: {
+        '/': (context) => HomePage(
+              isDarkMode: isDarkMode,
+              onThemeToggle: () {
+                setState(() {
+                  isDarkMode = !isDarkMode;
+                });
+              },
+            ),
+        '/yeonma': (context) => EnhanceSimulator(
+              isDarkMode: isDarkMode,
+              onDarkModeChanged: toggleDarkMode,
+            ),
+      },
       theme: ThemeData(
         primarySwatch: Colors.blue,
         textTheme: GoogleFonts.notoSansKrTextTheme(
@@ -48,26 +67,6 @@ class _MyAppState extends State<MyApp> {
           color: isDarkMode ? Colors.white : Colors.black,
         ),
       ),
-      onGenerateRoute: (settings) {
-        if (settings.name == '/yeonma') {
-          return MaterialPageRoute(
-            builder: (context) => EnhanceSimulator(
-              isDarkMode: isDarkMode,
-              onDarkModeChanged: toggleDarkMode,
-            ),
-          );
-        }
-        return MaterialPageRoute(
-          builder: (context) => HomePage(
-            isDarkMode: isDarkMode,
-            onThemeToggle: () {
-              setState(() {
-                isDarkMode = !isDarkMode;
-              });
-            },
-          ),
-        );
-      },
     );
   }
 }
