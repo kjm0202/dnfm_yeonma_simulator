@@ -32,8 +32,140 @@
   
   <title>클린타르</title>
   <link rel="manifest" href="manifest.json">
+
+  <style>
+     @keyframes fadeIn {
+      0%,
+      100% {
+        opacity: 0.5;
+      }
+      50% {
+        opacity: 1;
+      }
+    }
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    #loading {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #ffffff;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      transition: opacity 0.5s ease;
+    }
+
+    .spinner {
+      border: 8px solid #f3f3f3;
+      border-top: 8px solid #6750A4;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      animation: spin 1.5s linear infinite;
+      margin-bottom: 20px;
+    }
+   .loading-text {
+      font-family: 'Pretendard', sans-serif;
+      font-size: 1.2rem;
+      color: #6750A4;
+      animation: fadeIn 1.5s ease-in-out infinite;
+    }
+
+    /* 다크 모드 테마 */
+    @media (prefers-color-scheme: dark) {
+      body {
+        background-color: #121212;
+        color: white;
+      }
+      #loading {
+        background: #121212; /* 다크 모드에서 로딩 창 배경색 */
+      }
+      .loading-text {
+        color: #ffffff; /* 다크 모드에서 로딩 텍스트 색상 */
+      }
+    }
+  </style>
 </head>
 <body>
-  <script src="flutter_bootstrap.js" async></script>
+  <!-- WebAssembly COOP / COEP 에러 Workaround -->
+  <script src="coi-serviceworker.min.js"></script>
+
+  <div id="loading">
+    <div class="spinner"></div>
+    <div class="loading-text">로드 중...</div>
+  </div>
+  
+  <script>
+    // 중괄호 안에 띄어쓰기 하지 말 것 - 오류 발생 원인
+    {{flutter_js}}
+    {{flutter_build_config}}
+
+    // 크로미움 버전 확인 함수
+    function getChromeVersion() {
+      const userAgent = navigator.userAgent;
+      const isChrome = /Chrome\/([0-9]+)/.test(userAgent);
+      if (!isChrome) return 0;
+      return parseInt(userAgent.match(/Chrome\/([0-9]+)/)[1]);
+    }
+
+    // HTML 빌드 여부 확인
+    function isHtmlBuild() {
+      return _flutter.buildConfig?.builds.some(build => build.renderer === 'html') ?? false;
+    }
+
+    // WASM 빌드 여부 확인
+    function isWasmBuild() {
+      return _flutter.buildConfig?.builds.some(build => build.compileTarget === 'dart2wasm') ?? false;
+    }
+
+    const htmlBuild = isHtmlBuild();
+    console.log('HTML Build:', htmlBuild);
+
+    const chromeVersion = getChromeVersion();
+    console.log('Chrome Version:', chromeVersion);
+    
+    const wasmBuild = isWasmBuild();
+    console.log('WASM Build:', wasmBuild);
+    window.wasmBuild = wasmBuild;
+    
+    const useCanvasKit = !wasmBuild || chromeVersion < 119;
+    
+    const config = {
+      renderer: htmlBuild ? "html" : (useCanvasKit ? "canvaskit" : "skwasm"),
+    };
+    console.log('Renderer:', config.renderer);
+
+    const loading = document.getElementById('loading');
+    _flutter.loader.load({
+      config: config,
+      onEntrypointLoaded: async function (engineInitializer) {
+        loading.children[1].textContent = "엔진 초기화 중...";
+        const appRunner = await engineInitializer.initializeEngine();
+
+        loading.children[1].textContent = "거의 다 왔어요!";
+        await appRunner.runApp();
+
+        // 로딩 화면(구버전) 사라지기
+        loading.style.opacity = '0';
+        setTimeout(() => {
+          loading.style.display = 'none';
+        }, 500);
+      }
+    });
+  </script>
+  </script>
 </body>
 </html>
