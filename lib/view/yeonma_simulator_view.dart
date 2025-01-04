@@ -23,7 +23,7 @@ class _YeonmaSimulatorViewState extends State<YeonmaSimulatorView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('연마 시뮬레이터 V4.1'),
+        title: const Text('연마 시뮬레이터 V4.2'),
         backgroundColor: widget.isDarkMode ? Colors.grey[900] : Colors.white,
         actions: [
           IconButton(
