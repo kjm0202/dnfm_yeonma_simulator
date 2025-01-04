@@ -309,7 +309,7 @@ class _YeonmaSimulatorViewState extends State<YeonmaSimulatorView> {
       children: [
         // 텍스트필드
         Expanded(
-          flex: 2,
+          flex: 1,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8.0),
             child: TextField(
@@ -317,7 +317,7 @@ class _YeonmaSimulatorViewState extends State<YeonmaSimulatorView> {
               keyboardType: TextInputType.number,
               decoration: const InputDecoration(
                 labelText: '목표 단계',
-                hintText: '1-10 사이의 숫자를 입력하세요',
+                hintText: '1-10',
               ),
               onChanged: (value) {
                 final stage = int.tryParse(value);
@@ -325,6 +325,12 @@ class _YeonmaSimulatorViewState extends State<YeonmaSimulatorView> {
                   setState(() {
                     targetStage = stage;
                   });
+                } else {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text('1-10 사이의 숫자를 입력하세요'),
+                    ),
+                  );
                 }
               },
             ),

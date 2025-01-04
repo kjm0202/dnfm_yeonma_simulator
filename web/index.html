@@ -154,7 +154,7 @@
     _flutter.loader.load({
       config: config,
       onEntrypointLoaded: async function (engineInitializer) {
-        loading.children[1].textContent = "Flutter 엔진 초기화 중...";
+        loading.children[1].textContent = "엔진 초기화 중...";
         const appRunner = await engineInitializer.initializeEngine();
 
         loading.children[1].textContent = "거의 다 왔어요!";
