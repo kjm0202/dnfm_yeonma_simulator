@@ -267,7 +267,7 @@ class _YeonmaSimulatorViewState extends State<YeonmaSimulatorView> {
       elevation: 4,
       color: widget.isDarkMode ? Colors.grey[850] : Colors.grey[100],
       child: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(8.0),
         child: Table(
           defaultVerticalAlignment: TableCellVerticalAlignment.middle,
           children: [
@@ -375,13 +375,13 @@ class _YeonmaSimulatorViewState extends State<YeonmaSimulatorView> {
                 style: TextStyle(fontWeight: FontWeight.bold)),
             const SizedBox(height: 4),
             Text(
-                '연마석: ${NumberFormat('#,###').format(totalStoneUsed)} (${NumberFormat('#,###').format(totalStoneUsed * 417)}원)'),
+                '연마석: ${NumberFormat('#,###').format(totalStoneUsed)} (${NumberFormat('#,###').format(totalStoneUsed * 188)}원)'),
             Text(
-                '촉매제: ${NumberFormat('#,###').format(totalCatalystsUsed)} (${NumberFormat('#,###').format(totalCatalystsUsed * 2917)}원)'),
+                '촉매제: ${NumberFormat('#,###').format(totalCatalystsUsed)} (${NumberFormat('#,###').format(totalCatalystsUsed * 2250)}원)'),
             Text(
-                '상급 라이언 코크스: ${NumberFormat('#,###').format(totalSangrakoUsed)} (${NumberFormat('#,###').format(totalSangrakoUsed * 417)}원)'),
+                '상급 라이언 코크스: ${NumberFormat('#,###').format(totalSangrakoUsed)} (${NumberFormat('#,###').format(totalSangrakoUsed * 313)}원)'),
             Text(
-                '골드: ${NumberFormat('#,###').format(totalGoldUsed)} (${NumberFormat('#,###').format((totalGoldUsed / 2400).floor())}원)'),
+                '골드: ${NumberFormat('#,###').format(totalGoldUsed)} (${NumberFormat('#,###').format((totalGoldUsed / 3200).floor())}원)'),
             const Divider(),
             Text(
               '현재까지 사용된 현금: 약 ${NumberFormat('#,###').format(int.parse(calculateTotalCost()))}원',
@@ -401,7 +401,7 @@ class _YeonmaSimulatorViewState extends State<YeonmaSimulatorView> {
       color: widget.isDarkMode ? Colors.grey[850] : Colors.grey[100],
       elevation: 4,
       child: const Padding(
-        padding: EdgeInsets.all(4.0),
+        padding: EdgeInsets.all(8.0),
         child: Column(
           children: [
             Text('촉매제 72,000테라 / 연마석 6,000테라'),
