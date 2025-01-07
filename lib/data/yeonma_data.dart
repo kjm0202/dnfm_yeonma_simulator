@@ -135,8 +135,8 @@ final List<Map<String, dynamic>> stages1 = [
   }, // 1->2
   {
     success: 20,
-    maintain: 70,
-    fail: 10,
+    maintain: 60,
+    fail: 20,
     destroy: 0,
     catalysts: 2,
     sangrako: 4,
